@@ -46,13 +46,18 @@ After the installation the basic Apache-webserver runs with *PhpMyAdmin* on `htt
 
 *The Dockerfile is tested on Debian 12 (Bookworm), 13 (Trixie), Ubuntu 26.04.1 (Resolute Raccoon) and Ubuntu 24.04.5 (Noble Numbat)*
 
-<h3>Known error</h3>
+*[tested on 09/18/2026 @ Host: Debian 6.12.41-1 / Debian GNU/Linux 13]*
 
-If the build breaks with a missing public key, you need to set the PUBKEY-value by yourself.
+<h3>Known error</h3>
 
 ```console
 => ERROR [ 6/23] RUN PUBKEY=$(apt-get update 2>&1 | sed -En 's/.*(NO_PUBKEY|Missing key) ([[:xdigit:]]+).*/\2
+...
+0.549 gpg: WARNING: nothing exported
+0.562 gpg: no valid OpenPGP data found.
 ```
+
+If the build breaks with a missing public key, you need to set the PUBKEY-value by yourself.
 
 `
 RUN PUBKEY=<insert public-key value here> \
