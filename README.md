@@ -20,11 +20,20 @@ docker build --build-arg OS_VERSION=trixie -t lamp-server .
 
 <h3>Alternative: Build with Ubuntu</h3>
 
-The OS and OS-Version can be changed by arguments. For example you can compile the image with Ubuntu 24.04.5
+The OS and the Version can be changed by arguments. For example you can compile the image with Ubuntu 24.04.5
 
 ```console
 docker build --build-arg OS_NAME=ubuntu --build-arg OS_VERSION=noble -t lamp-server .
 ```
+
+<h3>Use another MySQL-Package</h3>
+
+```console
+docker build --build-arg MYSQL_PACKAGE=mysql-9.7-lts -t lamp-server .
+```
+
+See available MySQL-Packages here: http://repo.mysql.com/apt/
+
 
 <h2>Run the image</h2>
 
