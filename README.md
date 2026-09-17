@@ -12,7 +12,7 @@ The default OS is Debian 12 (Bookworm)
 docker build -t lamp-server .
 ```
 
-<h3>Build with other OS-version</h3>
+<h3>Build with other Debian-version</h3>
 
 ```console
 docker build --build-arg OS_VERSION=trixie -t lamp-server .
@@ -51,9 +51,13 @@ After the installation the basic Apache-webserver runs with *PhpMyAdmin* on `htt
 If the build breaks with a missing public key, you need to set the PUBKEY-value by yourself.
 
 ```console
+=> ERROR [ 6/23] RUN PUBKEY=$(apt-get update 2>&1 | sed -En 's/.*(NO_PUBKEY|Missing key) ([[:xdigit:]]+).*/\2
+```
+
+`
 RUN PUBKEY=<insert public-key value here> \
 && gpg ...
-```
+`
 
 <h3>Configuration</h3>
 
