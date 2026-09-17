@@ -1,4 +1,4 @@
-<h1>Docker LAMP-Webserver on Debian or Ubuntu</h1>
+<h1>Docker LAMP-Webserver on Debian based systems</h1>
 
 ![lamp-server](lamp-server.jpg)
 
@@ -12,7 +12,13 @@ The default OS is Debian 12 (Bookworm)
 docker build -t lamp-server .
 ```
 
-<h3>Build with Ubuntu</h3>
+<h3>Build with other OS-version</h3>
+
+```console
+docker build --build-arg OS_VERSION=trixie -t lamp-server .
+```
+
+<h3>Alternative: Build with Ubuntu</h3>
 
 The OS and OS-Version can be changed by arguments. For example you can compile the image with Ubuntu 24.04.5
 
@@ -42,6 +48,6 @@ After the installation the basic Apache-webserver runs with *PhpMyAdmin* on `htt
 
 <h3>Configuration</h3>
 
-The **Dockerfile** compiles the basic *LAMP-Server-image*. The server still needs to be configured.
-<br>
-Don't forget basic server security. (...remove apache-version from responses, deactivate file-listings, file-rights, unused server-modules, etc...)
+The **Dockerfile** compiles the basic *LAMP*-Server-image. The server still needs to be configured.
+
+Please don't forget basic server security. *(...remove Apache-version from responses, deactivate file-listings, file-rights, unused server-modules, etc...)*

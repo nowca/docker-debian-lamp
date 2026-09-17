@@ -9,7 +9,7 @@ ARG CREATE_PHPINFO_FILE=true
 ARG PHPMYADMIN_WEB_FOLDERNAME=phpmyadmin
 
 ### stage: linux
-FROM debian:$DEBIAN_VERSION AS lamp-linux
+FROM ${OS_NAME}:${OS_VERSION} AS lamp-linux
 
 # update system
 RUN apt-get update && apt-get upgrade -y
@@ -27,7 +27,8 @@ RUN apt-get install -y apache2
 
 ### stage: mysql
 FROM lamp-apache AS lamp-mysql
-ARG DEBIAN_VERSION
+ARG OS_NAME
+ARG OS_VERSION
 ARG MYSQL_PACKAGE
 
 ## install mysql-database-server
