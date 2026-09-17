@@ -1,0 +1,47 @@
+<h1>Docker LAMP-Webserver on Debian or Ubuntu</h1>
+
+![lamp-server](lamp-server.jpg)
+
+This Dockerfile builds a basic **LAMP**-Stack (*Linux, Apache, MySQL, PHP*) Docker-image on **Debian** or **Ubuntu**.
+
+<h2>Build the image</h2>
+
+The default OS is Debian 12 (Bookworm)
+
+```console
+docker build -t lamp-server .
+```
+
+<h3>Build with Ubuntu</h3>
+
+The OS and OS-Version can be changed by arguments. For example you can compile the image with Ubuntu 24.04.5
+
+```console
+docker build --build-arg OS_NAME=ubuntu --build-arg OS_VERSION=noble -t lamp-server .
+```
+
+<h2>Run the image</h2>
+
+```console
+docker run -itd --name lamp-server lamp-server
+```
+
+<h2>Login into the container</h2>
+
+```console
+docker exec -it lamp-server /bin/bash
+```
+
+After the installation the basic Apache-webserver runs with *PhpMyAdmin* on `http://<your-server>/phpmyadmin` and must be configured. The MySQL-Rootpassword ist `rootROOT123!` and must be changed.
+
+<h2>Annotations</h2>
+
+<h3>Compatibilty</h3>
+
+*The Dockerfile is successfully tested on Debian 12 (Bookworm), 13 (Trixie), Ubuntu 26.04.1 (Resolute Raccoon) and Ubuntu 24.04.5 (Noble Numbat)*
+
+<h3>Configuration</h3>
+
+The **Dockerfile** compiles the basic *LAMP-Server-image*. The server still needs to be configured.
+<br>
+Don't forget basic server security. (...remove apache-version from responses, deactivate file-listings, file-rights, unused server-modules, etc...)
