@@ -44,7 +44,16 @@ After the installation the basic Apache-webserver runs with *PhpMyAdmin* on `htt
 
 <h3>Compatibilty</h3>
 
-*The Dockerfile is successfully tested on Debian 12 (Bookworm), 13 (Trixie), Ubuntu 26.04.1 (Resolute Raccoon) and Ubuntu 24.04.5 (Noble Numbat)*
+*The Dockerfile is tested on Debian 12 (Bookworm), 13 (Trixie), Ubuntu 26.04.1 (Resolute Raccoon) and Ubuntu 24.04.5 (Noble Numbat)*
+
+<h3>Known error</h3>
+
+If the build breaks with a missing public key, you need to set the PUBKEY-value by yourself.
+
+```console
+RUN PUBKEY=<insert public-key value here> \
+&& gpg ...
+```
 
 <h3>Configuration</h3>
 
