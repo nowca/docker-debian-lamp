@@ -44,7 +44,7 @@ After the installation the basic Apache-webserver runs with *PhpMyAdmin* on `htt
 
 <h3>Compatibilty</h3>
 
-*The Dockerfile is tested on Debian 12 (Bookworm), 13 (Trixie), Ubuntu 26.04.1 (Resolute Raccoon) and Ubuntu 24.04.5 (Noble Numbat)*
+The Dockerfile build is tested on *Debian 12 (Bookworm)*, *Debian 13 (Trixie)*, *Ubuntu 26.04.1 (Resolute Raccoon)* and *Ubuntu 24.04.5 (Noble Numbat)*
 
 *[tested on 09/18/2026 @ Host: Debian 6.12.41-1 / Debian GNU/Linux 13]*
 
