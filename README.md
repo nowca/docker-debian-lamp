@@ -38,7 +38,7 @@ See available MySQL-Packages here: [https://repo.mysql.com/apt/](https://repo.my
 <h2>Run the image</h2>
 
 ```console
-docker run -itd --name lamp-server lamp-server
+docker run -itd --name lamp-server -p 80:80 -p 3306:3306 lamp-server
 ```
 
 You can use more arguments for server configuration like bind-mount for Apache or MySQL-data etc.
