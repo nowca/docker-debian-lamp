@@ -41,7 +41,9 @@ See available MySQL-Packages here: [https://repo.mysql.com/apt/](https://repo.my
 docker run -itd --name lamp-server lamp-server
 ```
 
-You can use more arguments for server configuration like bind-mount for Apache or MySQL-data etc. `... -v $(PWD)/website:/usr/local/apache2/htdocs/`
+You can use more arguments for server configuration like bind-mount for Apache or MySQL-data etc.
+
+`... -v $(PWD)/website:/usr/local/apache2/htdocs/`
 
 <h2>Login into the container</h2>
 
@@ -82,7 +84,7 @@ RUN PUBKEY=<insert public-key value here> \
 
 The Dockerfile compiles the basic *LAMP*-Server-image. The server still needs to be configured.
 
-Please don't forget basic server security: *(...remove Apache-version from responses, deactivate file-listings, file-rights, unused server-modules, etc...)*
+Please don't forget basic server security:
 
 - Disable Server Signature and Banner
 - Required Modules
