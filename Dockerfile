@@ -3,13 +3,16 @@
 
 ARG OS_NAME=debian
 ARG OS_VERSION=bookworm
+
+### stage: linux
+FROM ${OS_NAME}:${OS_VERSION}
+
+ARG OS_NAME
+ARG OS_VERSION
 ARG MYSQL_PACKAGE=mysql-8.4-lts
 ARG MYSQL_ROOT_PASSWORD=rootROOT123!
 ARG CREATE_PHPINFO_FILE=true
 ARG PHPMYADMIN_WEB_FOLDERNAME=phpmyadmin
-
-### stage: linux
-FROM ${OS_NAME}:${OS_VERSION} AS lamp-linux
 
 # update system
 RUN apt-get update && apt-get upgrade -y
@@ -18,18 +21,13 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y sudo vim net-tools htop wget curl gnupg lsb-release
 
 
-### stage: apache
-FROM lamp-linux AS lamp-apache
+### apache
 
 ## install apache-webserver
 RUN apt-get install -y apache2
 
 
-### stage: mysql
-FROM lamp-apache AS lamp-mysql
-ARG OS_NAME
-ARG OS_VERSION
-ARG MYSQL_PACKAGE
+### mysql
 
 ## install mysql-database-server
 
@@ -48,9 +46,6 @@ RUN apt-get update
 RUN apt-get upgrade
 
 # configure default configuration
-
-ARG MYSQL_ROOT_PASSWORD
-
 RUN echo "mysql-community-server mysql-community-server/root-pass password ${MYSQL_ROOT_PASSWORD}" | debconf-set-selections
 RUN echo "myql-community-server mysql-community-server/re-root-pass password ${MYSQL_ROOT_PASSWORD}" | debconf-set-selections
 RUN echo "mysql-community-server mysql-server/default-auth-override select Use Legacy Authentication Method (Retain MySQL 5.x Compatibility)" | debconf-set-selections
@@ -64,11 +59,7 @@ RUN ( /usr/bin/mysqld_safe > /dev/null 2>&1 & ) \
 && mysql_secure_installation -D --password=${MYSQL_ROOT_PASSWORD}
 
 
-### stage: php
-FROM lamp-mysql AS lamp-php
-
-ARG CREATE_PHPINFO_FILE
-ARG PHPMYADMIN_WEB_FOLDERNAME
+### php
 
 ## install php-modules
 RUN apt-get install -y php libapache2-mod-php php-cli php-mysql

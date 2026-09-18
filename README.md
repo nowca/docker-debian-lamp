@@ -1,6 +1,6 @@
 <h1>Docker LAMP-Webserver on Debian based systems</h1>
 
-![lamp-server](lamp-server.jpg)
+![docker-lamp](docker-lamp.png)
 
 This Dockerfile builds a basic **LAMP**-Stack (*Linux, Apache, MySQL, PHP*) Docker-image on **Debian** or **Ubuntu**.
 
@@ -32,7 +32,7 @@ docker build --build-arg OS_NAME=ubuntu --build-arg OS_VERSION=noble -t lamp-ser
 docker build --build-arg MYSQL_PACKAGE=mysql-9.7-lts -t lamp-server .
 ```
 
-See available MySQL-Packages here: http://repo.mysql.com/apt/
+See available MySQL-Packages here: [https://repo.mysql.com/apt/](https://repo.mysql.com/apt/)
 
 
 <h2>Run the image</h2>
@@ -40,6 +40,8 @@ See available MySQL-Packages here: http://repo.mysql.com/apt/
 ```console
 docker run -itd --name lamp-server lamp-server
 ```
+
+You can use more arguments for server configuration like bind-mount for Apache or MySQL-data etc. `... -v $(PWD)/website:/usr/local/apache2/htdocs/`
 
 <h2>Login into the container</h2>
 
@@ -53,7 +55,7 @@ After the installation the basic Apache-webserver runs with *PhpMyAdmin* on `htt
 
 <h3>Compatibilty</h3>
 
-The Dockerfile build is tested on *Debian 12 (Bookworm)*, *Debian 13 (Trixie)*, *Ubuntu 26.04.1 (Resolute Raccoon)* and *Ubuntu 24.04.5 (Noble Numbat)*
+The Dockerfile build is tested with the images *Debian 12 (Bookworm)*, *Debian 13 (Trixie)*, *Ubuntu 24.04.5 (Noble Numbat)* and *Ubuntu 26.04.1 (Resolute Raccoon)*
 
 *[tested on 09/18/2026 @ Host: Debian 6.12.41-1 / Debian GNU/Linux 13]*
 
@@ -68,6 +70,9 @@ The Dockerfile build is tested on *Debian 12 (Bookworm)*, *Debian 13 (Trixie)*, 
 
 If the build breaks with a missing public key, you need to set the PUBKEY-value by yourself.
 
+*(see NO_PUBKEY/Missing key with `apt-get update`)*
+
+
 `
 RUN PUBKEY=<insert public-key value here> \
 && gpg ...
@@ -75,6 +80,14 @@ RUN PUBKEY=<insert public-key value here> \
 
 <h3>Configuration</h3>
 
-The **Dockerfile** compiles the basic *LAMP*-Server-image. The server still needs to be configured.
+The Dockerfile compiles the basic *LAMP*-Server-image. The server still needs to be configured.
 
-Please don't forget basic server security. *(...remove Apache-version from responses, deactivate file-listings, file-rights, unused server-modules, etc...)*
+Please don't forget basic server security: *(...remove Apache-version from responses, deactivate file-listings, file-rights, unused server-modules, etc...)*
+
+- Disable Server Signature and Banner
+- Required Modules
+- Disable Directory Listings
+- Restrict Directory Access
+- Protect Upload Directories
+- HTTPS
+- ...advanced security configuration, like Security Headers etc.
